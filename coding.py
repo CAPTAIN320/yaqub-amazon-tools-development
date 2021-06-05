@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-#pd.set_option('display.max_rows', None)
+pd.set_option('display.max_colwidth', None)
 
 # an array of top amazon categories
 top_categories_array = ["Appliances", "Beauty & Personal Care", "Clothing, Shoes & Jewelry", 
@@ -27,11 +27,6 @@ all_scanned_categories_array = [""]
 
 # current category the file is working on
 selected_category = top_categories_array[2]
-
-
-
-
-
 
 
 # read the csv file
@@ -77,21 +72,26 @@ df_legitimate = df_legitimate.drop_duplicates(subset=["Brand"])
 print("There are", df_legitimate["Brand"].count(), "rows after removing duplicate Brands")
 
 
-
-
-
-# loop through brand names in the "Brand" column
+# stores urls of brands
+brand_url_array = []
+# loop through brand names in the "Brand" column and append
 for key, value in df_legitimate["Brand"].iteritems():
     # replace blank spce with a "+" for each brand name
     value = value.replace(" ", "+")
     search_url = "https://www.amazon.com/s?rh=n%3A{}%2Cp_89%3A{}"
     # concatenate category ID and brand names into the url
     brand_URL = search_url.format(categories_dict[selected_category],value)
-    print(brand_URL)
-    #print(value)
-    print()
+    #append brand urls
+    brand_url_array.append(brand_URL)
+
+# create column for Brand URLs
+df_legitimate["BrandURL"] = brand_url_array
 
 
-#df_legitimate["URLs"] = top_categories_array
+print(df_legitimate)
 
-#print(df_legitimate)
+df_legitimate.to_csv("output.csv")
+print("csv file has been generated")
+
+df_legitimate.to_html()
+print("html file has been generated")
