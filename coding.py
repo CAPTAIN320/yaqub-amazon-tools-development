@@ -6,7 +6,9 @@ pd.set_option('display.max_colwidth', None)
 
 
 csv_files = glob.glob("categories\*.csv")
-print(csv_files[1])
+current_csv_file = csv_files[4]
+current_csv_file = current_csv_file[20:-4]
+print(current_csv_file)
 
 # a dictionary of Amazon categories with their corresponding Top-Level category
 top_level_categories_dict = {
@@ -17,7 +19,8 @@ top_level_categories_dict = {
                         "Handmade": "Handmade",
                         "Sports & Outdoors": "Sports & Outdoors",
                         "Tools & Home Improvement": "Tools & Home Improvement",
-                        "Toys & Games": "Toys & Games"
+                        "Toys & Games": "Toys & Games",
+                        "Card Games": "Toys & Games"
                         }
 
 # a dictionary of Amazon categories with their corresponding Amazon ID
@@ -29,7 +32,8 @@ categories_ID_dict = {
                         "Handmade": 11260432011,
                         "Sports & Outdoors": 3375251,
                         "Tools & Home Improvement": 228013,
-                        "Toys & Games": 165793011
+                        "Toys & Games": 165793011,
+                        "Card Games": 165793011 # ID same as top category (url issues)
                         }
 
 # convert dictionary into list--------------------maybe not needed since we have dictionary of all Amazon top level categories
@@ -43,7 +47,11 @@ print(categories_list_values)
 
 
 # current category the file is working on
-selected_category = top_level_categories_dict["Sports & Outdoors"]
+selected_category = top_level_categories_dict[current_csv_file]########### make file names loop inside this, and you will also fix the logic below
+print("selected category is", selected_category)
+
+# gets the ID in the categories ID dictionary
+selected_category_ID = categories_ID_dict[current_csv_file]
 
 
 # read the csv file
@@ -98,6 +106,7 @@ for key, value in df_legitimate["Brand"].iteritems():
     search_url = "https://www.amazon.com/s?rh=n%3A{}%2Cp_89%3A{}"
     # concatenate category ID and brand names into the url
     brand_URL = search_url.format(categories_ID_dict[selected_category],value)
+    # brand_URL = search_url.format(selected_category_ID,value)
     #append brand urls
     brand_url_array.append(brand_URL)
 
@@ -114,3 +123,4 @@ print("csv file has been generated")
 df_legitimate["BrandURL"] = '<a target="_blank" href=' + df_legitimate["BrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
 df_legitimate.to_html("output.html", escape=False)
 print("html file has been generated")
+
