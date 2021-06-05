@@ -93,5 +93,7 @@ print(df_legitimate)
 df_legitimate.to_csv("output.csv")
 print("csv file has been generated")
 
-df_legitimate.to_html()
+# convert BrandURLs into links
+df_legitimate["BrandURL"] = '<a target="_blank" href=' + df_legitimate["BrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
+df_legitimate.to_html("output.html", escape=False)
 print("html file has been generated")
