@@ -24,18 +24,22 @@ categories_dict = {
 # an array of all the categories that were scanned using ZonAsin
 all_scanned_categories_array = [""]
 
-top_brands_dict = {
 
-}
+# current category the file is working on
+selected_category = top_categories_array[2]
 
-selected_category = top_categories_array[1]
+
+
+
+
+
 
 # read the csv file
 df_csv_file = pd.read_csv("categories\Brands - " + selected_category + ".csv")
 
 #csv_file = open("categories\Brands - " + selected_category + ".csv", encoding="utf-8")
 
-# removes all ASINs without a brand
+# retains only ASINs with a Brand
 df_csv_file = df_csv_file[df_csv_file["Brand"].notnull()]
 
 # adds a category to ASINs without a category 
@@ -61,13 +65,33 @@ df_legitimate = df_csv_file[no_of_legit_categories]
 # sort legitimate rows according to Top SalesRank
 df_legitimate = df_legitimate.sort_values(by=["SalesRank"], ascending=True)
 
+# number of rows where SalesRank = 0
+rows_with_zero_SalesRank = df_legitimate["SalesRank"].isin([0])
+print("There are", rows_with_zero_SalesRank.sum(), "rows with SalesRank = 0 (pre-removal)")
+
+# retains only rows with a SalesRank > 0
+df_legitimate = df_legitimate[df_legitimate["SalesRank"] != 0]
+
 # remove duplicate Brands
 df_legitimate = df_legitimate.drop_duplicates(subset=["Brand"])
 print("There are", df_legitimate["Brand"].count(), "rows after removing duplicate Brands")
 
-# number of rows where SalesRank = 0
-rows_with_zero_SalesRank = df_legitimate["SalesRank"].isin([0])
-print("There are", rows_with_zero_SalesRank.sum(), "rows with SalesRank = 0")
 
-print(df_legitimate)
 
+
+
+# loop through brand names in the "Brand" column
+for key, value in df_legitimate["Brand"].iteritems():
+    # replace blank spce with a "+" for each brand name
+    value = value.replace(" ", "+")
+    search_url = "https://www.amazon.com/s?rh=n%3A{}%2Cp_89%3A{}"
+    # concatenate category ID and brand names into the url
+    brand_URL = search_url.format(categories_dict[selected_category],value)
+    print(brand_URL)
+    #print(value)
+    print()
+
+
+#df_legitimate["URLs"] = top_categories_array
+
+#print(df_legitimate)
