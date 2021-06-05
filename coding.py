@@ -25,11 +25,24 @@ df_csv_file = pd.read_csv("categories\Brands - " + top_categories_array[2] + ".c
 # removes all ASINs without a brand
 df_csv_file = df_csv_file[df_csv_file["Brand"].notnull()]
 
-print(df_csv_file)
-
 
 # adds a category to ASINs without a category 
 df_csv_file["Category"] = df_csv_file["Category"].fillna(top_categories_array[2])
 
 
-print(df_csv_file)
+# rows that belong to the file (i.e. the majo)
+no_of_legit_categories = df_csv_file["Category"].str.contains(top_categories_array[2])
+
+# rows that do NOT belong to the file
+no_of_illegal_categories = ~df_csv_file["Category"].str.contains(top_categories_array[2], na = True)
+
+print("There are", df_csv_file["Category"].count(), "total rows in the file")
+print("There are", no_of_legit_categories.sum(), "legitimate rows with the category of", top_categories_array[2])
+print("There are", no_of_illegal_categories.sum(), " illegal rows in the file")
+
+# data frame with only the categories that belong to file
+df_csv_file = df_csv_file[no_of_legit_categories]
+
+df_illegal_csv_file = no_of_illegal_categories
+
+print(no_of_illegal_categories.sum())
