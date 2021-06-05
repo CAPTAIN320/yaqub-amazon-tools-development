@@ -3,12 +3,7 @@ import numpy as np
 
 pd.set_option('display.max_colwidth', None)
 
-# an array of top amazon categories
-top_categories_array = ["Appliances", "Beauty & Personal Care", "Clothing, Shoes & Jewelry", 
-                        "Electronics", "Handmade", "Sports & Outdoors", "Tools & Home Improvement",
-                        "Toys & Games"]
-
-# an dictionary Amazon categories with their Amazon ID
+# a dictionary of Amazon categories with their Amazon ID
 categories_dict = {
                         "Appliances": 2619525011,
                         "Beauty & Personal Care": 3760911,
@@ -17,16 +12,22 @@ categories_dict = {
                         "Handmade": 11260432011,
                         "Sports & Outdoors": 3375251,
                         "Tools & Home Improvement": 228013,
-                        "Toys & Games": 165793011
-            }
+                        "Toys & Games": 165793011}
+
+# convert dictionary to list
+categories_list = list(categories_dict)
+print(categories_list[1])
+
+# convert dictionary values to list
+categories_dict_values = categories_dict.values()
+categories_list_values = list(categories_dict_values)
 
 
-# an array of all the categories that were scanned using ZonAsin
-all_scanned_categories_array = [""]
+print(categories_list_values)
 
 
 # current category the file is working on
-selected_category = top_categories_array[2]
+selected_category = categories_list[5]
 
 
 # read the csv file
@@ -41,10 +42,10 @@ df_csv_file = df_csv_file[df_csv_file["Brand"].notnull()]
 df_csv_file["Category"] = df_csv_file["Category"].fillna(selected_category)
 
 # rows with categories that belong to the file
-no_of_legit_categories = df_csv_file["Category"].str.contains(selected_category)
+no_of_legit_categories = df_csv_file["Category"].str.contains(selected_category)##################################
 
 # rows with categories that do NOT belong to the file
-no_of_illegal_categories = ~df_csv_file["Category"].str.contains(selected_category, na = True)
+no_of_illegal_categories = ~df_csv_file["Category"].str.contains(selected_category, na = True)#########################
 
 print("There are", df_csv_file["Category"].count(), "total rows in the file (after removing brandless ASINs)")
 print("There are", no_of_legit_categories.sum(), "legitimate rows with the category of", selected_category)
