@@ -1,10 +1,27 @@
+import glob
 import pandas as pd
 import numpy as np
 
 pd.set_option('display.max_colwidth', None)
 
-# a dictionary of Amazon categories with their Amazon ID
-categories_dict = {
+
+csv_files = glob.glob("categories\*.csv")
+print(csv_files[1])
+
+# a dictionary of Amazon categories with their corresponding Top-Level category
+top_level_categories_dict = {
+                        "Appliances": "Appliances",
+                        "Beauty & Personal Care": "Beauty & Personal Care",
+                        "Clothing, Shoes & Jewelry": "Clothing, Shoes & Jewelry",
+                        "Electronics": "Electronics",
+                        "Handmade": "Handmade",
+                        "Sports & Outdoors": "Sports & Outdoors",
+                        "Tools & Home Improvement": "Tools & Home Improvement",
+                        "Toys & Games": "Toys & Games"
+                        }
+
+# a dictionary of Amazon categories with their corresponding Amazon ID
+categories_ID_dict = {
                         "Appliances": 2619525011,
                         "Beauty & Personal Care": 3760911,
                         "Clothing, Shoes & Jewelry": 7141123011,
@@ -12,22 +29,21 @@ categories_dict = {
                         "Handmade": 11260432011,
                         "Sports & Outdoors": 3375251,
                         "Tools & Home Improvement": 228013,
-                        "Toys & Games": 165793011}
+                        "Toys & Games": 165793011
+                        }
 
-# convert dictionary to list
-categories_list = list(categories_dict)
-print(categories_list[1])
+# convert dictionary into list--------------------maybe not needed since we have dictionary of all Amazon top level categories
+#categories_list = list(categories_ID_dict)
+#print(categories_list[1])
 
-# convert dictionary values to list
-categories_dict_values = categories_dict.values()
+# convert dictionary values into list
+categories_dict_values = categories_ID_dict.values()
 categories_list_values = list(categories_dict_values)
-
-
 print(categories_list_values)
 
 
 # current category the file is working on
-selected_category = categories_list[5]
+selected_category = top_level_categories_dict["Sports & Outdoors"]
 
 
 # read the csv file
@@ -81,7 +97,7 @@ for key, value in df_legitimate["Brand"].iteritems():
     value = value.replace(" ", "+")
     search_url = "https://www.amazon.com/s?rh=n%3A{}%2Cp_89%3A{}"
     # concatenate category ID and brand names into the url
-    brand_URL = search_url.format(categories_dict[selected_category],value)
+    brand_URL = search_url.format(categories_ID_dict[selected_category],value)
     #append brand urls
     brand_url_array.append(brand_URL)
 
