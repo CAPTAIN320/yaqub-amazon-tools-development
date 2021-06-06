@@ -4,10 +4,11 @@ from dominate.tags import *
 
 html_files = glob.glob('html/*.html')
 
+
 with document(title='AMAZON CATEGORIES') as doc:
     h1('Amazon Categories')
-    for file in html_files:
-        div(li(a(file.title(), href='%s' % file)))
+    for path in html_files:
+        h3(li(a(path[5:-5].title(), href='%s' % path)))
 
 
 with open('index.html', 'w') as f:
