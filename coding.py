@@ -92,8 +92,9 @@ categories_ID_list = list(categories_ID_dict.values())
 
 csv_files = glob.glob("categories\*.csv")
 
-# an array of the csv files
+# an array of the csv files in the folder
 current_files_array = []
+logger.info("The CSV files are")
 # loop to create array of current csv files found in the folder
 for file in csv_files:
     file = file[20:-4]
@@ -101,16 +102,18 @@ for file in csv_files:
     logger.info(file)
 
 
-print(current_files_array)
-logger.info(current_files_array)
+print("KEEP CALM, Program is running :)")
+logger.info("")
 
 
 # loops through every csv file found
 for current_csv_file in current_files_array:
 
-    # current category the file is working on
-    selected_category = top_level_categories_dict[current_csv_file]########### make file names loop inside this, and you will also fix the logic below
-    print("selected category is", selected_category)
+    # category of the current file
+    selected_category = top_level_categories_dict[current_csv_file]
+    #print("Current category is", selected_category)
+    logger.info("Current file is "+current_csv_file)
+    logger.info("Current category is "+selected_category)
 
     # gets the ID in the categories ID dictionary
     selected_category_ID = categories_ID_dict[current_csv_file]
@@ -178,12 +181,17 @@ for current_csv_file in current_files_array:
 
     # generate new csv file
     df_legitimate.to_csv("filtered_csv\\"+current_csv_file+".csv")
-    print(current_csv_file+" csv file has been generated")
+    #print(current_csv_file+" csv file has been generated")
+    logger.info(current_csv_file+" csv file has been generated")
 
     # convert BrandURLs into links
     df_legitimate["BrandURL"] = '<a target="_blank" href=' + df_legitimate["BrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
     # generate csv file
     df_legitimate.to_html("html\\"+current_csv_file+".html", escape=False)
-    print(current_csv_file+" html file has been generated")
-    print()
+    #print(current_csv_file+" html file has been generated")
+    logger.info(current_csv_file+" html file has been generated")
+    #print()
+    logger.info("")
 
+
+print("\nFinished. Check the log for more info")
