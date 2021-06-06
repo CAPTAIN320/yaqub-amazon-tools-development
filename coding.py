@@ -107,21 +107,21 @@ logger.info("")
 
 
 # loops through every csv file found
-for current_csv_file in current_files_array:
+for current_file in current_files_array:
 
     # category of the current file
-    selected_category = top_level_categories_dict[current_csv_file]
-    #print("Current category is", selected_category)
-    logger.info("Current file is "+current_csv_file)
-    logger.info("Current category is "+selected_category)
+    current_category = top_level_categories_dict[current_file]
+    #print("Current category is", current_category)
+    logger.info("Current file is "+current_file)
+    logger.info("Current category is "+current_category)
 
     # gets the ID in the categories ID dictionary
-    selected_category_ID = categories_ID_dict[current_csv_file]
+    selected_category_ID = categories_ID_dict[current_file]
 
 
     # read the csv file
     df_csv_file = pd.read_csv(
-        "categories\Brands - " + selected_category + ".csv", 
+        "categories\Brands - " + current_category + ".csv", 
         dtype={"ASIN": "string", "Brand": "string", "Category": "string", "SalesRank": int}
         )
 
@@ -129,16 +129,16 @@ for current_csv_file in current_files_array:
     df_csv_file = df_csv_file[df_csv_file["Brand"].notnull()]
 
     # adds a category to ASINs without a category 
-    df_csv_file["Category"] = df_csv_file["Category"].fillna(selected_category)
+    df_csv_file["Category"] = df_csv_file["Category"].fillna(current_category)
 
     # rows with categories that belong to the file
-    no_of_legit_categories = df_csv_file["Category"].str.contains(selected_category)##################################
+    no_of_legit_categories = df_csv_file["Category"].str.contains(current_category)##################################
 
     # rows with categories that do NOT belong to the file
-    no_of_illegal_categories = ~df_csv_file["Category"].str.contains(selected_category, na = True)#########################
+    no_of_illegal_categories = ~df_csv_file["Category"].str.contains(current_category, na = True)#########################
 
     #print("There are", df_csv_file["Category"].count(), "total rows in the file (after removing brandless ASINs)")
-    #print("There are", no_of_legit_categories.sum(), "legitimate rows with the category of", selected_category)
+    #print("There are", no_of_legit_categories.sum(), "legitimate rows with the category of", current_category)
     #print("There are", no_of_illegal_categories.sum(), "illegal rows in the file")
 
 
@@ -171,7 +171,7 @@ for current_csv_file in current_files_array:
         value = value.replace(" ", "+")
         search_url = "https://www.amazon.com/s?rh=n%3A{}%2Cp_89%3A{}"
         # concatenate category ID and brand names into the url
-        brand_URL = search_url.format(categories_ID_dict[selected_category],value)
+        brand_URL = search_url.format(categories_ID_dict[current_category],value)
         # brand_URL = search_url.format(selected_category_ID,value)
         #append brand urls
         brand_url_array.append(brand_URL)
@@ -180,16 +180,16 @@ for current_csv_file in current_files_array:
     df_legitimate["BrandURL"] = brand_url_array
 
     # generate new csv file
-    df_legitimate.to_csv("filtered_csv\\"+current_csv_file+".csv")
-    #print(current_csv_file+" csv file has been generated")
-    logger.info(current_csv_file+" csv file has been generated")
+    df_legitimate.to_csv("filtered_csv\\"+current_file+".csv")
+    #print(current_file+" csv file has been generated")
+    logger.info(current_file+" csv file has been generated")
 
     # convert BrandURLs into links
     df_legitimate["BrandURL"] = '<a target="_blank" href=' + df_legitimate["BrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
     # generate csv file
-    df_legitimate.to_html("html\\"+current_csv_file+".html", escape=False)
-    #print(current_csv_file+" html file has been generated")
-    logger.info(current_csv_file+" html file has been generated")
+    df_legitimate.to_html("html\\"+current_file+".html", escape=False)
+    #print(current_file+" html file has been generated")
+    logger.info(current_file+" html file has been generated")
     #print()
     logger.info("")
 
