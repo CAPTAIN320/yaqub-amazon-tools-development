@@ -1,9 +1,19 @@
 import glob
+import logging
 import pandas as pd
-import numpy as np
 
 pd.set_option('display.max_colwidth', None)
 
+# logger creation and configuration
+logging.basicConfig(filename="std.log", 
+					format='%(asctime)s %(message)s', 
+					filemode='w')
+
+# creating object
+logger = logging.getLogger()
+
+# set the threshold of logger to DEBUG 
+logger.setLevel(logging.DEBUG)
 
 # a dictionary of Amazon categories with their corresponding Top-Level category
 top_level_categories_dict = {
@@ -88,9 +98,12 @@ current_files_array = []
 for file in csv_files:
     file = file[20:-4]
     current_files_array.append(file)
+    logger.info(file)
 
 
 print(current_files_array)
+logger.info(current_files_array)
+
 
 # loops through every csv file found
 for current_csv_file in current_files_array:
