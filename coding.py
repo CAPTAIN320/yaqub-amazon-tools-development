@@ -76,8 +76,7 @@ categories_ID_dict = {
                         }
 
 # convert categories ID dictionary values into list
-categories_list_values = list(categories_ID_dict.values())
-print(categories_list_values)
+categories_ID_list = list(categories_ID_dict.values())
 
 
 
@@ -85,16 +84,15 @@ csv_files = glob.glob("categories\*.csv")
 
 # an array of the csv files
 current_files_array = []
-# loop to create array of current csv files
+# loop to create array of current csv files found in the folder
 for file in csv_files:
     file = file[20:-4]
     current_files_array.append(file)
-    print(file)
 
 
 print(current_files_array)
 
-
+# loops through every csv file found
 for current_csv_file in current_files_array:
 
     # current category the file is working on
@@ -106,7 +104,10 @@ for current_csv_file in current_files_array:
 
 
     # read the csv file
-    df_csv_file = pd.read_csv("categories\Brands - " + selected_category + ".csv")
+    df_csv_file = pd.read_csv(
+        "categories\Brands - " + selected_category + ".csv", 
+        dtype={"ASIN": "string", "Brand": "string", "Category": "string", "SalesRank": int}
+        )
 
     # retains only ASINs with a Brand
     df_csv_file = df_csv_file[df_csv_file["Brand"].notnull()]
@@ -171,4 +172,5 @@ for current_csv_file in current_files_array:
     # generate csv file
     df_legitimate.to_html("html\\"+current_csv_file+".html", escape=False)
     print(current_csv_file+" html file has been generated")
+    print()
 
