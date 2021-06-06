@@ -5,11 +5,6 @@ import numpy as np
 pd.set_option('display.max_colwidth', None)
 
 
-csv_files = glob.glob("categories\*.csv")
-current_csv_file = csv_files[4]
-current_csv_file = current_csv_file[20:-4]
-print(current_csv_file)
-
 # a dictionary of Amazon categories with their corresponding Top-Level category
 top_level_categories_dict = {
                         "Appliances": "Appliances",
@@ -36,14 +31,32 @@ categories_ID_dict = {
                         "Card Games": 165793011 # ID same as top category (url issues)
                         }
 
-# convert dictionary into list--------------------maybe not needed since we have dictionary of all Amazon top level categories
-#categories_list = list(categories_ID_dict)
-#print(categories_list[1])
-
 # convert dictionary values into list
 categories_dict_values = categories_ID_dict.values()
 categories_list_values = list(categories_dict_values)
 print(categories_list_values)
+
+
+
+csv_files = glob.glob("categories\*.csv")
+current_csv_file = csv_files[4]
+current_csv_file = current_csv_file[20:-4]
+print(current_csv_file)
+
+# an array of the csv files
+csv_files_array = csv_files
+
+
+current_files_array = []
+for file in csv_files_array:
+    file = file[20:-4]
+    current_files_array.append(file)
+    print(file)
+
+
+print(current_files_array)
+
+
 
 
 # current category the file is working on
@@ -57,8 +70,6 @@ selected_category_ID = categories_ID_dict[current_csv_file]
 # read the csv file
 df_csv_file = pd.read_csv("categories\Brands - " + selected_category + ".csv")
 
-#csv_file = open("categories\Brands - " + selected_category + ".csv", encoding="utf-8")
-
 # retains only ASINs with a Brand
 df_csv_file = df_csv_file[df_csv_file["Brand"].notnull()]
 
@@ -71,9 +82,9 @@ no_of_legit_categories = df_csv_file["Category"].str.contains(selected_category)
 # rows with categories that do NOT belong to the file
 no_of_illegal_categories = ~df_csv_file["Category"].str.contains(selected_category, na = True)#########################
 
-print("There are", df_csv_file["Category"].count(), "total rows in the file (after removing brandless ASINs)")
-print("There are", no_of_legit_categories.sum(), "legitimate rows with the category of", selected_category)
-print("There are", no_of_illegal_categories.sum(), "illegal rows in the file")
+#print("There are", df_csv_file["Category"].count(), "total rows in the file (after removing brandless ASINs)")
+#print("There are", no_of_legit_categories.sum(), "legitimate rows with the category of", selected_category)
+#print("There are", no_of_illegal_categories.sum(), "illegal rows in the file")
 
 
 # data frame with the illegal rows from the file
@@ -86,15 +97,15 @@ df_legitimate = df_csv_file[no_of_legit_categories]
 df_legitimate = df_legitimate.sort_values(by=["SalesRank"], ascending=True)
 
 # number of rows where SalesRank = 0
-rows_with_zero_SalesRank = df_legitimate["SalesRank"].isin([0])
-print("There are", rows_with_zero_SalesRank.sum(), "rows with SalesRank = 0 (pre-removal)")
+#rows_with_zero_SalesRank = df_legitimate["SalesRank"].isin([0])
+#print("There are", rows_with_zero_SalesRank.sum(), "rows with SalesRank = 0 (pre-removal)")
 
 # retains only rows with a SalesRank > 0
 df_legitimate = df_legitimate[df_legitimate["SalesRank"] != 0]
 
 # remove duplicate Brands
 df_legitimate = df_legitimate.drop_duplicates(subset=["Brand"])
-print("There are", df_legitimate["Brand"].count(), "rows after removing duplicate Brands")
+#print("There are", df_legitimate["Brand"].count(), "rows after removing duplicate Brands")
 
 
 # stores urls of brands
@@ -113,14 +124,13 @@ for key, value in df_legitimate["Brand"].iteritems():
 # create column for Brand URLs
 df_legitimate["BrandURL"] = brand_url_array
 
-
-print(df_legitimate)
-
-df_legitimate.to_csv("output.csv")
-print("csv file has been generated")
+# generate new csv file
+df_legitimate.to_csv(current_csv_file+".csv")
+print(current_csv_file+" csv file has been generated")
 
 # convert BrandURLs into links
 df_legitimate["BrandURL"] = '<a target="_blank" href=' + df_legitimate["BrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
-df_legitimate.to_html("output.html", escape=False)
-print("html file has been generated")
+# generate csv file
+df_legitimate.to_html(current_csv_file+".html", escape=False)
+print(current_csv_file+" html file has been generated")
 
