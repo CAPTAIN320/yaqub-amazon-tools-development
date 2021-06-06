@@ -171,8 +171,7 @@ for current_file in current_files_array:
         value = value.replace(" ", "+")
         search_url = "https://www.amazon.com/s?rh=n%3A{}%2Cp_89%3A{}"
         # concatenate category ID and brand names into the url
-        brand_URL = search_url.format(categories_ID_dict[current_category],value)
-        # brand_URL = search_url.format(selected_category_ID,value)
+        brand_URL = search_url.format(selected_category_ID,value)
         #append brand urls
         brand_url_array.append(brand_URL)
 
