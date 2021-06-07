@@ -13,3 +13,4 @@ with document(title='AMAZON CATEGORIES') as doc:
 
 with open('index.html', 'w') as f:
     f.write(doc.render())
+
