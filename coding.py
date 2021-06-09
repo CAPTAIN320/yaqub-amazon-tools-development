@@ -210,7 +210,8 @@ for current_US_file in current_US_files_array:
     # stores urls of brands
     us_brand_url_array = []
     jp_brand_url_array = []
-    ali_brand_url_array = []
+    aliex_brand_url_array = []
+    aliba_brand_url_array = []
     gogl_brand_url_array = []
     # loop through brand names in the "Brand" column and append
     for key, value in df_legitimate["Brand"].iteritems():
@@ -219,23 +220,27 @@ for current_US_file in current_US_files_array:
         # create the urls
         us_search_url = "https://www.amazon.com/s?rh=n%3A{}%2Cp_89%3A{}"
         jp_search_url = "https://www.amazon.co.jp/s?rh=n%3A{}%2Cp_89%3A{}"
-        ali_search_url = "https://www.aliexpress.com/af/{}.html"
+        aliex_search_url = "https://www.aliexpress.com/af/{}.html"
+        aliba_search_url = "https://www.alibaba.com/trade/search?SearchText={}"
         gogl_search_URL = "https://www.google.com/search?q={}"
         # concatenate category ID and brand names into the url
         us_brand_URL = us_search_url.format(selected_US_category_ID,value)
         jp_brand_URL = jp_search_url.format(selected_JP_category_ID,value)
-        ali_brand_URL = ali_search_url.format(value)
+        aliex_brand_URL = aliex_search_url.format(value)
+        aliba_brand_URL = aliba_search_url.format(value)
         gogl_search_URL = gogl_search_URL.format(value)
         #append brand urls
         us_brand_url_array.append(us_brand_URL)
         jp_brand_url_array.append(jp_brand_URL)
-        ali_brand_url_array.append(ali_brand_URL)
+        aliex_brand_url_array.append(aliex_brand_URL)
+        aliba_brand_url_array.append(aliba_brand_URL)
         gogl_brand_url_array.append(gogl_search_URL)
 
     # create column for Brand URLs
     df_legitimate["US_BrandURL"] = us_brand_url_array
     df_legitimate["JP_BrandURL"] = jp_brand_url_array
-    df_legitimate["AliBrandURL"] = ali_brand_url_array
+    df_legitimate["AliExBrandURL"] = aliex_brand_url_array
+    df_legitimate["AliBaBrandURL"] = aliba_brand_url_array
     df_legitimate["GoglBrandURL"] = gogl_brand_url_array
 
     # generate new csv file_US
@@ -246,7 +251,8 @@ for current_US_file in current_US_files_array:
     # convert BrandURLs into links
     df_legitimate["US_BrandURL"] = '<a target="_blank" href=' + df_legitimate["US_BrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
     df_legitimate["JP_BrandURL"] = '<a target="_blank" href=' + df_legitimate["JP_BrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
-    df_legitimate["AliBrandURL"] = '<a target="_blank" href=' + df_legitimate["AliBrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
+    df_legitimate["AliExBrandURL"] = '<a target="_blank" href=' + df_legitimate["AliExBrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
+    df_legitimate["AliBaBrandURL"] = '<a target="_blank" href=' + df_legitimate["AliBaBrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
     df_legitimate["GoglBrandURL"] = '<a target="_blank" href=' + df_legitimate["GoglBrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
     
     # generate csv file_US
@@ -331,7 +337,8 @@ for current_JP_file in current_JP_files_array:
     # stores urls of brands
     us_brand_url_array = []
     jp_brand_url_array = []
-    ali_brand_url_array = []
+    aliex_brand_url_array = []
+    aliba_brand_url_array = []
     gogl_brand_url_array = []
     # loop through brand names in the "Brand" column and append
     for key, value in df_legitimate["Brand"].iteritems():
@@ -340,23 +347,27 @@ for current_JP_file in current_JP_files_array:
         # create the urls
         us_search_url = "https://www.amazon.com/s?rh=n%3A{}%2Cp_89%3A{}"
         jp_search_url = "https://www.amazon.co.jp/s?rh=n%3A{}%2Cp_89%3A{}"
-        ali_search_url = "https://www.aliexpress.com/af/{}.html"
+        aliex_search_url = "https://www.aliexpress.com/af/{}.html"
+        aliba_search_url = "https://www.alibaba.com/trade/search?SearchText={}"
         gogl_search_URL = "https://www.google.com/search?q={}"
         # concatenate category ID and brand names into the url
         us_brand_URL = us_search_url.format(selected_US_category_ID,value)
         jp_brand_URL = jp_search_url.format(selected_JP_category_ID,value)
-        ali_brand_URL = ali_search_url.format(value)
+        aliex_brand_URL = aliex_search_url.format(value)
+        aliba_brand_URL = aliba_search_url.format(value)
         gogl_search_URL = gogl_search_URL.format(value)
         #append brand urls
         us_brand_url_array.append(us_brand_URL)
         jp_brand_url_array.append(jp_brand_URL)
-        ali_brand_url_array.append(ali_brand_URL)
+        aliex_brand_url_array.append(aliex_brand_URL)
+        aliba_brand_url_array.append(aliba_brand_URL)
         gogl_brand_url_array.append(gogl_search_URL)
 
     # create column for Brand URLs
     df_legitimate["US_BrandURL"] = us_brand_url_array
     df_legitimate["JP_BrandURL"] = jp_brand_url_array
-    df_legitimate["AliBrandURL"] = ali_brand_url_array
+    df_legitimate["AliExBrandURL"] = aliex_brand_url_array
+    df_legitimate["AliBaBrandURL"] = aliba_brand_url_array
     df_legitimate["GoglBrandURL"] = gogl_brand_url_array
 
     # generate new csv file_JP
@@ -367,7 +378,8 @@ for current_JP_file in current_JP_files_array:
     # convert BrandURLs into links
     df_legitimate["US_BrandURL"] = '<a target="_blank" href=' + df_legitimate["US_BrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
     df_legitimate["JP_BrandURL"] = '<a target="_blank" href=' + df_legitimate["JP_BrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
-    df_legitimate["AliBrandURL"] = '<a target="_blank" href=' + df_legitimate["AliBrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
+    df_legitimate["AliExBrandURL"] = '<a target="_blank" href=' + df_legitimate["AliExBrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
+    df_legitimate["AliBaBrandURL"] = '<a target="_blank" href=' + df_legitimate["AliBaBrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
     df_legitimate["GoglBrandURL"] = '<a target="_blank" href=' + df_legitimate["GoglBrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
     
     # generate csv file_JP
