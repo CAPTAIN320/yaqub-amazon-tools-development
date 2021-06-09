@@ -7,8 +7,8 @@ pd.set_option('display.max_colwidth', None)
 
 # logger creation and configuration
 logging.basicConfig(filename="std.log", 
-					format='%(asctime)s %(message)s', 
-					filemode='w')
+                    format='%(asctime)s %(message)s', 
+                    filemode='w')
 
 # creating object
 logger = logging.getLogger()
@@ -27,7 +27,7 @@ top_level_categories_dict = {
                         "Tools & Home Improvement": "Tools & Home Improvement",
                         "Toys & Games": "Toys & Games",
                         "Office Products": "Office Products",
-                        "Women Hand Bags & Wallets": "Clothing, Shoes & Jewelry",
+                        "Women Bags & Wallets": "Clothing, Shoes & Jewelry",
                         "Women Jewelry": "Clothing, Shoes & Jewelry",
                         "Men Jewelry": "Clothing, Shoes & Jewelry",
                         "Girl Jewelry": "Clothing, Shoes & Jewelry",
@@ -49,6 +49,12 @@ top_level_categories_dict = {
                         "Women Flats (shoes)": "Clothing, Shoes & Jewelry",
                         "Women Boots (shoes)": "Clothing, Shoes & Jewelry",
                         "Women Loafers (shoes)": "Clothing, Shoes & Jewelry",
+                        "Jewelry Accessories": "Clothing, Shoes & Jewelry",
+                        "Puzzles": "Toys & Games",
+                        "Building Toys": "Toys & Games",
+                        "Sports & Outdoor Play": "Toys & Games",
+                        "Necklaces & Pendants": "Clothing, Shoes & Jewelry",
+                        "Stuffed Animals & Plush Toys": "Toys & Games"
                         }
 
 # a dictionary of Amazon categories with their corresponding Amazon ID
@@ -64,7 +70,7 @@ categories_ID_dict = {
                         "Toys & Games": [165793011, 13299531],
                         "Musical Instruments": [11091801, 2123629051],
                         "Office Products": [1064954, 86731051],
-                        "Women Hand Bags & Wallets": [15743631, 2221075051],
+                        "Women Bags & Wallets": [15743631, 2221075051],
                         "Women Jewelry": [7192394011, 5519723051],
                         "Men Jewelry": [3887881, 86246051],
                         "Girl Jewelry": [3880961, 0],
@@ -74,24 +80,23 @@ categories_ID_dict = {
                         "Men Hoodies": [1258644011, 2131434051],
                         "Men Jackets": [1045830, 2131419051],
                         "Women Hoodies": [1258603011, 2131504051],
-                        "Girl Hoodies": [5604818011, 0],
+                        "Girl Hoodies": [5604818011, 2131598051],
                         "Men Watches": [6358539011, 333009011],
                         "Men Bags": [14864589011, 5355946051],
                         "Men Wallets": [7072333011, 2221209051],
                         "Women Watches": [6358543011, 333010011],
-                        "Women Bags": [0, 5355945051],
                         "Women Wallets": [7072326011, 2221186051],
-                        "Card Games": [166239011, 0],
-                        "Board Games": [166225011, 0],
+                        "Card Games": [166239011, 2189604051],
+                        "Board Games": [166225011, 2189603051],
                         "Women Pumps (shoes)": [679416011, 2221092051],
-                        "Women Flats (shoes)": [679399011, 0],
+                        "Women Flats (shoes)": [679399011, 2221083051],
                         "Women Boots (shoes)": [679380011, 2221085051],
                         "Women Loafers (shoes)": [679404011, 2221090051],
                         "Jewelry Accessories": [9616098011, 86252051],
-                        "Puzzles": [0, 2189596051],
-                        "Building Toys": [0, 2189163051],
-                        "Sports & Outdoor Play": [0, 2189318051],
-                        "Necklaces & Pendants": [0, 86228051],
+                        "Puzzles": [166359011, 2189596051],
+                        "Building Toys": [166092011, 2189163051],
+                        "Sports & Outdoor Play": [166420011, 2189318051],
+                        "Necklaces & Pendants": [7454934011, 86228051],
                         "Stuffed Animals & Plush Toys": [166461011, 2189188051]
                         }
 
@@ -105,8 +110,6 @@ categories_ID_dict = {
 csv_files_US = glob.glob("categories\*.csv")
 
 csv_files_JP = glob.glob("categories_JP\*.csv")
-
-
 
 """ # loop to create array of current csv files found in the folder
 for file_US in csv_files_US:
@@ -145,7 +148,6 @@ logger.info("")
 
 # loops through every csv file_US found in categories US folder
 for current_US_file in current_US_files_array:
-    
     
     # gets the ID of Amazon JP in the categories ID dictionary
     selected_US_category_ID = categories_ID_dict[current_US_file][0]
@@ -269,7 +271,6 @@ print("\nFinished for USA categories.\nNow doing Japanese categories")
 
 # loops through every csv file_JP found in categories JP folder
 for current_JP_file in current_JP_files_array:
-    
     
     # gets the ID of Amazon JP in the categories ID dictionary
     selected_US_category_ID = categories_ID_dict[current_JP_file][0]
