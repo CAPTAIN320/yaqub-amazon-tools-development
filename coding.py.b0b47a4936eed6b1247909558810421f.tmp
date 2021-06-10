@@ -350,7 +350,7 @@ for current_JP_file in current_JP_files_array:
         jp_search_url = "https://www.amazon.co.jp/s?rh=n%3A{}%2Cp_89%3A{}"
         aliex_search_url = "https://www.aliexpress.com/af/{}.html"
         aliba_search_url = "https://www.alibaba.com/trade/search?SearchText={}"
-        gogl_search_URL = "https://www.google.com/search?q={}+"+ current_category #! I want to add a category at the tail of google seach
+        gogl_search_URL = "https://www.google.com/search?q={}+"+ current_category #! I want to add a category at the tail of google search
 
         # concatenate category ID and brand names into the url
         us_brand_URL = us_search_url.format(selected_US_category_ID,value)
