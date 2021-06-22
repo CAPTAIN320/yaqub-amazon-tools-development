@@ -1,17 +1,17 @@
-2021-06-09 15:39:30,052 The US CSV files are
-2021-06-09 15:39:30,052 ['Appliances']
-2021-06-09 15:39:30,052 The JP CSV files are
-2021-06-09 15:39:30,052 ['Appliances']
-2021-06-09 15:39:30,052 
-2021-06-09 15:39:30,052 Current file_US is Appliances
-2021-06-09 15:39:30,052 Current category is Appliances
-2021-06-09 15:39:30,369 Note: NumExpr detected 16 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
-2021-06-09 15:39:30,369 NumExpr defaulting to 8 threads.
-2021-06-09 15:39:30,379 Appliances csv file_US has been generated
-2021-06-09 15:39:30,399 Appliances html file_US has been generated
-2021-06-09 15:39:30,399 
-2021-06-09 15:39:30,400 Current file_JP is Appliances
-2021-06-09 15:39:30,400 Current category is Appliances
-2021-06-09 15:39:30,446 Appliances csv file_JP has been generated
-2021-06-09 15:39:30,618 Appliances html file_JP has been generated
-2021-06-09 15:39:30,618 
+2021-06-23 01:21:30,873 The US CSV files are
+2021-06-23 01:21:30,873 ['Appliances']
+2021-06-23 01:21:30,873 The JP CSV files are
+2021-06-23 01:21:30,873 ['Appliances']
+2021-06-23 01:21:30,873 
+2021-06-23 01:21:30,873 Current file_US is Appliances
+2021-06-23 01:21:30,873 Current category is Appliances
+2021-06-23 01:21:31,266 Note: NumExpr detected 16 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2021-06-23 01:21:31,266 NumExpr defaulting to 8 threads.
+2021-06-23 01:21:31,327 Appliances csv file_US has been generated
+2021-06-23 01:21:31,346 Appliances html file_US has been generated
+2021-06-23 01:21:31,346 
+2021-06-23 01:21:31,346 Current file_JP is Appliances
+2021-06-23 01:21:31,346 Current category is Appliances
+2021-06-23 01:21:31,911 Appliances csv file_JP has been generated
+2021-06-23 01:21:32,103 Appliances html file_JP has been generated
+2021-06-23 01:21:32,103 

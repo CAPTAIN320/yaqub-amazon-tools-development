@@ -226,14 +226,14 @@ for current_US_file in current_US_files_array:
         aliba_search_url = "https://www.alibaba.com/trade/search?SearchText={}"
         gogl_search_URL = "https://www.google.com/search?q={}"
         # concatenate category ID and brand names into the url
-        us_brand_URL = us_search_url.format(selected_US_category_ID,value)
-        jp_brand_URL = jp_search_url.format(selected_JP_category_ID,value)
+        us_brand_url = us_search_url.format(selected_US_category_ID,value)
+        jp_brand_url = jp_search_url.format(selected_JP_category_ID,value)
         aliex_brand_URL = aliex_search_url.format(value)
         aliba_brand_URL = aliba_search_url.format(value)
         gogl_search_URL = gogl_search_URL.format(value)
         #append brand urls
-        us_brand_url_array.append(us_brand_URL)
-        jp_brand_url_array.append(jp_brand_URL)
+        us_brand_url_array.append(us_brand_url)
+        jp_brand_url_array.append(jp_brand_url)
         aliex_brand_url_array.append(aliex_brand_URL)
         aliba_brand_url_array.append(aliba_brand_URL)
         gogl_brand_url_array.append(gogl_search_URL)
@@ -257,7 +257,7 @@ for current_US_file in current_US_files_array:
     df_legitimate["AliBaBrandURL"] = '<a target="_blank" href=' + df_legitimate["AliBaBrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
     df_legitimate["GoglBrandURL"] = '<a target="_blank" href=' + df_legitimate["GoglBrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
     
-    # generate csv file_US
+    # generate html file_US
     df_legitimate.to_html("html\\"+current_US_file+".html", escape=False)
     
     #print(current_US_file+" html file_US has been generated")
@@ -352,14 +352,14 @@ for current_JP_file in current_JP_files_array:
         aliba_search_url = "https://www.alibaba.com/trade/search?SearchText={}"
         gogl_search_URL = "https://www.google.com/search?q={}"
         # concatenate category ID and brand names into the url
-        us_brand_URL = us_search_url.format(selected_US_category_ID,value)
-        jp_brand_URL = jp_search_url.format(selected_JP_category_ID,value)
+        us_brand_url = us_search_url.format(selected_US_category_ID,value)
+        jp_brand_url = jp_search_url.format(selected_JP_category_ID,value)
         aliex_brand_URL = aliex_search_url.format(value)
         aliba_brand_URL = aliba_search_url.format(value)
         gogl_search_URL = gogl_search_URL.format(value)
         #append brand urls
-        us_brand_url_array.append(us_brand_URL)
-        jp_brand_url_array.append(jp_brand_URL)
+        us_brand_url_array.append(us_brand_url)
+        jp_brand_url_array.append(jp_brand_url)
         aliex_brand_url_array.append(aliex_brand_URL)
         aliba_brand_url_array.append(aliba_brand_URL)
         gogl_brand_url_array.append(gogl_search_URL)
@@ -383,7 +383,7 @@ for current_JP_file in current_JP_files_array:
     df_legitimate["AliBaBrandURL"] = '<a target="_blank" href=' + df_legitimate["AliBaBrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
     df_legitimate["GoglBrandURL"] = '<a target="_blank" href=' + df_legitimate["GoglBrandURL"] + '><div>' + df_legitimate["Brand"] + '</div></a>'
     
-    # generate csv file_JP
+    # generate html file_JP
     df_legitimate.to_html("html\\JP - "+current_JP_file+".html", escape=False)
     
     #print(current_JP_file+" html file_JP has been generated")
